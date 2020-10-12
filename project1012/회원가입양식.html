@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+width: 100%;
+padding: 12px;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+margin-top: 6px;
+margin-bottom: 16px;
+resize: vertical;
+}
+
+input[type=button] {
+background-color: #4CAF50;
+color: white;
+padding: 12px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+input[type=button]:hover {
+background-color: #45a049;
+}
+
+.container {
+margin: center;
+width: 800px;
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+position: relative;
+}
+</style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+// $(document).ready(function(){
+
+// }); 
+// == $(document).ready(function(){});
+$(function(){  
+    // 입력양식이 화면밖에 나와있게..
+    $(bt).click(function(){
+        // 유효성 체크
+        checkValid();
+    });
+});
+
+// 순수 js코드로 작성할 경우
+// function checkValid1(){
+//     var fname = document.getElementById("fname");
+//     var lname = document.getElementById("lname");
+//     var form1 = document.getElementById("form1");
+//     var country = document.getElementById("country");
+//     var subject = document.getElementById("subject");
+
+//     if(fname.value==""){
+//         alert("이름 입력해주세요");
+//     }else if(lname.value==""){
+//         alert("성 입력해주세요");
+//     }else if(country.value==""){
+//         alert("지역 선택해주세요");
+//     }else if(subject.value==""){
+//         alert("아무거나 적으셔");
+//     }else{
+//         $("#form1").attr("action", "http://localhost:7979/"); //전송 url , 구분값(URI)이 필요
+//         form1.submit();
+//     }
+// }
+
+// jquery로 작성할 경우
+function checkValid(){
+    if($("#fname").val()==""){
+        alert("이름을 입력하세요,,");
+        $("#fname").focus();
+        return;
+    }else if($("#lname").val()==""){
+        alert("성을 입력하세요,,");
+        $("#lname").focus();
+        return;
+    }else if($("#country").val()==""){
+        alert("지역을 입력하세요,,");
+        $("#country").focus();
+        return;
+    }else if($("textarea").val()==""){
+        alert("아무거나 입력하세요,,");
+        $("textarea").focus();
+        return;
+    }else{
+        $("#form1").attr("action", "http://localhost:7979/regist"); //전송 url , 구분값(URI)이 필요
+        $("#form1").submit();
+    }
+}
+
+// function onOff(){
+//     // if($(".container").css.left=="0px"){
+//     //     $(".container").css({
+//     //     "left":"0px"
+//     //     }).animate({
+//     //     "left":"-800px"
+//     // }, "slow");
+//     // }else{
+//     //     $(".container").css({
+//     //     "left":"-800px"
+//     // }).animate({
+//     //     "left":"0px"
+//     // }, "slow");
+//     // }
+//     $(".container").css({
+//         "left":"0px"
+//         }).animate({
+//         "left":"-800px"
+//     }, "slow");
+    
+// }
+</script>
+<body>
+
+<h3>Contact Form</h3>
+
+<div class="container">
+    <form id="form1" action="/action_page.php">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+        <select id="country" name="country">
+            <option value="">select your country!</option>
+            <option value="australia">Australia</option>
+            <option value="canada">Canada</option>
+            <option value="usa">USA</option>
+        </select>
+        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+        <input type="button" value="Submit" id="bt">
+    </form>
+</div>
+<!-- <input type="button" value="띄우기" onClick="onOff()"/> -->
+</body>
+</html>
