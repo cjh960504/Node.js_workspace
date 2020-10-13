@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form button{
+        background: aquamarine;
+        width: 80px;
+        height: 40px;
+    }
+    form input[name='m_id'], input[name='m_pw']{
+        font-weight: bold;
+        height: 30px;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(function(){
+        // 버튼 클릭이벤트
+        // JQuery는 css의 선택자를 따른다..
+        $("form button").on("click", function(){
+            checkValue();
+        })
+    });
+
+    // $(선택자)
+    // 유효성 체크함수
+    function checkValue(){
+        if($("form input[name='m_id']").val()==""){
+            alert("아이디를 입력해주세요.");
+            $("form input[name='m_id']").focus();
+        }else if($("form input[name='m_pw']").val()==""){
+            alert("비밀번호를 입력해주세요.");
+            $("form input[name='m_pw']").focus();
+        }else{
+            $("form").attr({
+                "action":"/login",
+                "method":"get"
+                // get : 적은 양의 데이터 전송 시, 헤더와 함께 보냄
+                // post : 적지 않은 양의 데이터, 보안에 위협이 될만한 데이터들은 헤더 뒤로 
+            }); //전송대상서버주소
+            $("form").submit(); //전송!!
+        }
+    }
+</script>
+<body>
+    <!--
+        form태그란? 전송범위를 설정할 수 있는 양식 태그
+        id, name 공통점 : 문서내 dom 요소간 구분
+        차이점 : id중복 허용X, name 중복 O
+                    서버에 전송 시, 변수 역할을 해주는 것은 오직 name만이 가능
+    -->
+    <form>
+        <input type="text" name="m_id" placeholder="아이디 입력"/>
+        <input type="password" name="m_pw" placeholder="비밀번호 입력"/>
+        <!-- html5에서 등장한 아래의 button태그는 form안에 둘 경우 자동 submit발생 -->
+        <button type="button">전송</button>
+    </form>
+</body>
+</html>
