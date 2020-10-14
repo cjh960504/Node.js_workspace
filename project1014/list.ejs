@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%="게시판 목록"%>
+    <table width="100%" border="1px">
+        <tr>
+            <th colspan="5">게시판 목록</th>
+        </tr>
+        <tr>
+            <th>No.</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>등록일</th>
+            <th>조회수</th>
+        </tr>
+        <!-- <%%>의미 : %로 감싼 코드만 렌더링의 대상이 된다. -->
+        <!-- ejs.render() : ejs파일의 <%%> 코드 영역을 서버에서 수행시킨 후 -->
+        <!-- 응답정보를 구성하여 클라이언트에게 보낸다. -->
+        <% 
+            var total=100;
+        %>
+        <%for(var i=1;i<=total;i++){%>
+            <%if(i%3==0){%>
+                <tr bgcolor="yellow">
+            <%}else{%>
+                <tr>
+                <%}%>
+                <td><%=i%></td>
+                <td><a href="/board/list?no=<%=i%>">내일부터는 대면강의시작입니다.</a></td>
+                <td>로동부</td>
+                <td>2020.10.14</td>
+                <td>590</td>
+            </tr>
+        <%}%>
+        
+    </table>
+</body>
+</html>

@@ -16,3 +16,11 @@ member_skill_id int primary key auto_increment
 ,foreign key (member2_id) references member2(member2_id)
 ,foreign key (skill_id) references skill(skill_id)
 );
+
+insert into skill(name) values('java');
+insert into skill(name) values('oracle');
+insert into skill(name) values('android');
+insert into skill(name) values('python');
+insert into skill(name) values('swift');
+insert into skill(name) values('r');
+
