@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(function(){
+        
+    });
+</script>
+<body>
+
+    <select name="" id="" onChange="alert('선택변경');">
+        <option value="0">동물구분</option>
+        <%for(var i=0;i<categoryArray.length;i++){%>
+            <%var category = categoryArray[i];%>
+            <option value="<%=category.category_id%>"><%=category.category_name%></option>
+        <%}%>
+    </select>
+
+    <select name="" id="">
+        <option value="0">동물이름</option>
+    </select>
+
+</body>
+</html>

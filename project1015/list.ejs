@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>총 회원 수는 <%=memberArray.length%>명 입니다.</h1>
+    <table border="10px" width="100%">
+        <tr>
+            <th>member2_id</th>
+            <th>uid</th>
+            <th>password</th>
+            <th>uname</th>
+            <th>phone</th>
+            <th>email</th>
+            <th>receive</th>
+            <th>memo</th>
+        </tr>
+        <%for(var i=0;i<memberArray.length;i++){%>
+            <%var member = memberArray[i]%>
+            <tr align="center" onmouseover="this.style.background='gray'" onmouseout="this.style.background=''">
+                <td><a href="/member/detail?member2_id=<%=member.member2_id%>"><%=member.member2_id%></a></td>
+                <td><%=member.uid%></td>
+                <td><%=member.password%></td>
+                <td><%=member.uname%></td>
+                <td><%=member.phone%></td>
+                <td><%=member.email%></td>
+                <td><%=member.receive%></td>
+                <td><%=member.memo%></td>
+            </tr>
+        <%}%>    
+            <tr>
+                <td colspan="8">
+                    <button onclick="location.href='/member/registForm'">회원등록</button>
+                    <button onclick="location.href='/'">메인으로</button>
+                </td>
+            </tr>
+    </table>
+</body>
+</html>
