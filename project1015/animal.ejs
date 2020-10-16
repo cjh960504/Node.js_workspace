@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
 <script>
-    $(function(){
-        
-    });
+    function getSubList(obj){
+        // 서버에 요청 (GET/POST)
+        // js는 보안이 불가 (HTML:소스와 함께 작성되므로, 소스보기에서 원본소스가 노출)
+        // var sel1 = document.getElementsByName("category_id")[0];
+        location.href="/animal?category_id="+obj.value;
+    }
 </script>
+</head>
 <body>
+    서버에서 넘겨받은 category_id는 <%=category_id%>
+<select name="category_id" id="" onChange="getSubList(this)">
+    <option value="0">동물구분</option>
+    <%for(var i=0;i<categoryArray.length;i++){%>
+        <%var category = categoryArray[i]; %>
+            <option <%if(category_id==category.category_id){%>selected<%}%> value="<%=category.category_id%>"><%=category.category_name%></option>
+        
+    <%}%>        
+</select>    
 
-    <select name="" id="" onChange="alert('선택변경');">
-        <option value="0">동물구분</option>
-        <%for(var i=0;i<categoryArray.length;i++){%>
-            <%var category = categoryArray[i];%>
-            <option value="<%=category.category_id%>"><%=category.category_name%></option>
-        <%}%>
-    </select>
-
-    <select name="" id="">
-        <option value="0">동물이름</option>
-    </select>
+<select name="animal_id" id="">
+    <option value="0">동물이름</option>
+    <%for(var i=0;i<animalArray.length;i++){%>
+        <%var animal = animalArray[i]%>
+        <option value="<%=animal.animal_id%>"><%=animal.name%></option>
+    <%}%>
+</select>    
 
 </body>
 </html>

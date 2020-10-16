@@ -37,6 +37,8 @@ var server =http.createServer(function(req, res){
         update(req, res);
     }else if(urlJson.pathname=="/category"){ //동물구분을 요청하면
         getCategory(req, res);
+    }else if(urlJson.pathname="/animal"){
+        getAnimal(req, res);
     }   
 });
 
@@ -206,7 +208,7 @@ function update(req, res){
     
 }
 
-// 동물의 종류 가져오기
+// 카테고리의 종류 가져오기
 function getCategory(req, res){
     var sql = "select * from category";
 
@@ -223,10 +225,47 @@ function getCategory(req, res){
                         categoryArray:record
                     }));
                 }
-            })
+            });
         }
     });
 }
+
+// 동물의 목록 가져오기
+function getAnimal(req, res){
+    var sql = "select * from category";
+
+    con.query(sql, function(error, record, fields){
+        if(error){
+            console.log("동물구분 목록 조회실패 ", error);
+        }else{
+            var categoryRecord=record; //카테고리 목록 배열
+            var category_id = urlJson.query.category_id; // get방식의 category_id 파라미터 받기
+            sql = "select * from animal where category_id="+category_id;
+        
+            // mysql 연동
+            con.query(sql, function(error, record, fields){
+                if(error){
+                    console.log("동물목록 가져오기 실패 ", error);
+                }else{
+                    console.log("record : ", record);
+                    fs.readFile("./animal.ejs", "utf-8", function(err, data){
+                        if(err){
+                            console.log("animal.ejs 가져오기 실패", err);
+                        }else{
+                            res.writeHead(200, {"Content-Type":"text/html; charset=utf-8"});
+                            res.end(ejs.render(data, {
+                                animalArray:record,
+                                categoryArray:categoryRecord,
+                                category_id:category_id
+                            }));
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+
 // mysql 접속
 function connect(){
     con = mysql.createConnection({
